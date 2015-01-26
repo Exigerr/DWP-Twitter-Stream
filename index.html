@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter Term Tracker - The Three Ts</title>
+    <link rel="shortcut icon" type="image/png" href="Images/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="Styles/styles.css">
+</head>
+<body>
+<header id="headerBar">
+    <div class="centreWrapper verticalCentreChildren">
+        <h1 id="pageTitle">Twitter Term Tracker</h1>
+        <form class="modernStyle verticalCentreChildren">
+            <input type="text" id="trackTerm" value="" placeholder="#CookieMonster">
+            <input type="submit" id="addTerm" value="Track">
+        </form>
+    </div>
+</header>
+<main>
+    <form id="termWrapper" class="modernStyle">
+        <h2>Terms</h2>
+        <select id="terms">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes Mercedes Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+        <input type="submit" id="removeTerm" value="Remove Term">
+    </form>
+    <canvas id="dataCanvas" width="600" height="400">
+        <h1>Unfortunately it seems that this Canvas data visualisation is just to darn awesome for your browser to run!</h1>
+        <p>Try updating your browser or using a different browser (such as Google Chrome or Mozilla Firefox)</p>
+    </canvas>
+</main>
+<script src="Scripts/classesAndHelpers.js"></script>
+<script src="Scripts/canvasData.js"></script>
+<script src="Scripts/app.js"></script>
+<script src="Scripts/start.js"></script>
+</body>
+
+</html>

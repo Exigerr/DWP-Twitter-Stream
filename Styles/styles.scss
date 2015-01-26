@@ -1,0 +1,169 @@
+//--------------------------------------------------------------------------------
+//    VARIABLES
+//--------------------------------------------------------------------------------
+$primaryColour: #00BCD4;
+$darkPrimaryColour: #0097A7;
+$lightPrimaryColour: #B2EBF2;
+
+$secondaryColour: #FF5722;
+
+$textColour: #212121;
+$secondaryTextColour: #727272;
+
+$dividerColour: #B6B6B6;
+$generalPadding: 16px;
+$smallBorderSize: 6px;
+
+//--------------------------------------------------------------------------------
+//    MIXINS
+//--------------------------------------------------------------------------------
+@mixin vendor-prefix($name, $argument) {
+  -moz-#{$name}: #{$argument};
+  -webkit-#{$name}: #{$argument};
+  #{$name}: #{$argument};
+}
+
+
+////-------------------------------------------------------------------------------
+//    GENERAL
+//--------------------------------------------------------------------------------
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,h2,h3 {
+  font-family: Impact, Charcoal, sans-serif;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+
+
+//--------------------------------------------------------------------------------
+//    LAYOUT
+//--------------------------------------------------------------------------------
+#headerBar {
+  width: 100%;
+  min-height: 60px;
+  padding: $generalPadding;
+  @include vendor-prefix(box-sizing, border-box);
+
+  background: $primaryColour;
+  border-top: $generalPadding solid $darkPrimaryColour;
+
+  -webkit-box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.centreWrapper {
+  min-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.verticalCentreChildren {
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -4px;
+  }
+}
+
+#pageTitle {
+  color: #fff;
+  margin-right: $generalPadding*2;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  font-size: 0;
+}
+
+//--------------------------------------------------------------------------------
+//    FORMS
+//--------------------------------------------------------------------------------
+.modernStyle {
+  width: 50%;
+  min-width: 300px;
+  max-width: 600px;
+  padding-top: $smallBorderSize;
+  font-size: 1rem;
+
+  input {
+    width: 65%;
+    letter-spacing: 1px;
+
+  }
+  input[type="submit"] {
+    width: 30%;
+    padding: $generalPadding /2 $generalPadding;
+    background: $darkPrimaryColour;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #FFF;
+
+    &:focus, &:active {
+      background: $lightPrimaryColour;
+      border-bottom-color: $darkPrimaryColour;
+    }
+  }
+
+  input::-webkit-input-placeholder {
+    color: $dividerColour;
+  }
+  input::-moz-placeholder {
+    color: $dividerColour;
+  }
+
+  input, select {
+    padding: $generalPadding/ 2 $generalPadding $generalPadding/2 $generalPadding/2;
+    border: none;
+    border-bottom: $smallBorderSize solid $primaryColour;
+    @include vendor-prefix(box-sizing, border-box);
+    font-size: 1em;
+    @include vendor-prefix(transition, all 0.3s ease);
+  }
+  input:focus, input:active, select:focus, select:active {
+    outline: none;
+    background: #ECFDFD;
+    border-bottom-color: $lightPrimaryColour;
+    @include vendor-prefix(transition, all 0.3s ease);
+  }
+
+  select {
+    margin-left: $generalPadding;
+    padding-top: $generalPadding/2 - 2;
+  }
+  option {
+    font-size: 1em;
+  }
+}
+
+
+#termWrapper {
+  width: auto;
+  position: absolute;
+  right: 0;
+  margin: 0;
+  display: none;
+  background: #fff;
+  @include vendor-prefix(transform, translate(100%, 0%));
+  @include vendor-prefix(transition, transform 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955));
+
+
+  h2 {
+    color: $secondaryTextColour;
+    letter-spacing: 1px;
+  }
+
+  input, select {
+    width: 100%;
+    display: block;
+    margin: 0;
+    border-bottom: none;
+  }
+}
