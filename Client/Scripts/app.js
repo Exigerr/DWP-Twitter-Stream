@@ -3,28 +3,49 @@ var App =  (function () {
         this.ws;
         this.termHandler = new TermHandler(this.ws);
         this.toTrackElem = document.getElementById('trackTerm');
+        this.listElem = document.getElementById('termWrapper');
+        this.listElem.style.display = 'block';
     }
 
     App.prototype.start = function(){
         this.ws = new WebSocket('ws://localhost:1337');
         this.ws.onmessage = this.termHandler.response.bind(this);
 
-        document.getElementById('addTerm').addEventListener('click', this.submitTerm.bind(this), false);
-        document.getElementById('removeTerm').addEventListener('click', this.removeTerm.bind(this), false);
+        document.getElementById('addTerm').addEventListener('click', this.submit.bind(this), false);
+        document.getElementById('removeTerm').addEventListener('click', this.remove.bind(this), false);
     };
 
-    App.prototype.submitTerm = function(e){
+    App.prototype.submit = function(e){
         e.preventDefault();
         var val = this.toTrackElem.value;
         if(val !== ''){
-            this.termHandler.addTerm(val.split(/[ ,]+/));
+            if(this.termHandler.addTerm(val.split(/[ ,]+/)) === true){
+                var option = document.createElement('option');
+                option.value = val;
+                option.innerHTML = val;
+                this.listElem.appendChild(option);
+                this.toggleVisibility(this.termHandler.list.length > 0);
+            }
         }
     };
 
-    App.prototype.removeTerm = function(e){
+    App.prototype.remove = function(e){
         e.preventDefault();
-        this.termHandler.removeTerm();
+        this.listElem.selectedIndex;
+        //remove term;
+        if(this.termHandler.removeTerm() === true){
+            this.toggleVisibility(this.termHandler.list.length === 0);
+        }
 
+    };
+
+    App..prototype.toggleVisibility = function(bool){
+        if(bool === true){
+            translateElem(this.listElem, 0,0);
+        }
+        else {
+            translateElem(this.listElem, 100,0);
+        }
     };
 
     return App;
@@ -34,24 +55,15 @@ var App =  (function () {
 var TermHandler =  (function () {
     function TermHandler (ws){
         this.ws = ws;
-        this.isActive = false;
-        this.listElem = document.getElementById('termWrapper');
-        this.listElem.style.display = 'block';
+        this.list = [];
     }
 
-    TermHandler.prototype.registerEvents = function(){
 
-    };
-
-    TermHandler.prototype.addTerm = function(){
+    TermHandler.prototype.addTerm = function(newTerms){
         //Check if term exists in array.
-
         //Add term to list
-        if(this.isActive === false){
-            this.isActive = true;
-            this.toggleVisibility();
-        }
         //Send term to server
+        //return if added or not
     };
 
     TermHandler.prototype.removeTerm = function(){
@@ -64,15 +76,6 @@ var TermHandler =  (function () {
         var data = JSON.parse(obj);
         //Sort
         //Update List - Array Splice?
-    };
-
-    TermHandler.prototype.toggleVisibility = function(){
-        if(this.isActive === true){
-            translateElem(this.listElem, 0,0);
-        }
-        else {
-            translateElem(this.listElem, 100,0);
-        }
     };
 
     return TermHandler;
