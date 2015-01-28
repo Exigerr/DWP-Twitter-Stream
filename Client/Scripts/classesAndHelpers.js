@@ -14,9 +14,9 @@ var SimpleVector = (function SimpleVector(x,y){
 //Uber fast version of Math.atan2
 //---------------------------------------------------------------
 function atan2(x,y){
-    if (x == 0) {
+    if (x === 0) {
         if (y > 0) return Math.PI / 2;
-        if (y == 0) return 0;
+        if (y === 0) return 0;
         return -Math.PI / 2;
     }
     var radian, z = y / x;
