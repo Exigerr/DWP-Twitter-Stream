@@ -11,12 +11,13 @@ var twitter = new TwitterHandler(config.twitterKeys);
 
 wss.on('connection', function(ws) {
     ws.on('message', function(obj) {
+        var data = null;
         try{
-            controller.route(JSON.parse(obj), ws);
+           data = JSON.parse(obj);
         }
         catch(e){
             console.log('Someone naughty sent invalid JSON! :O');
         }
-
+        controller.route(data, ws);
     });
 });
